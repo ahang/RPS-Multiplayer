@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    var maxPlayers = 2;
+
     // Initialize Firebase
     var config = {
     apiKey: "AIzaSyAy3oio7aeJt92EEhN7_ogUYU1yEShljOU",
@@ -11,11 +13,22 @@ $(document).ready(function() {
 
     firebase.initializeApp(config);
 
-    //Grabbing a ref to the database service
     var database = firebase.database();
 
-    database.ref().on("value", function(snapshot) {
+    $(".add-player-btn").on("click", function(event) {
+        event.preventDefault();
 
+        var playerName = $(".name-input").val().trim();
+        if ()
+
+        var newPlayer = {
+            name: playerName
+        };
+
+        database.ref().push(newPlayer);
+        console.log("Successfully add newPlayer");
+
+        $("name-input").val("");
     });
 
 
