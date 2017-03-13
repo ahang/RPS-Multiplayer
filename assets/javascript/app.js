@@ -8,7 +8,7 @@ $(document).ready(function() {
     	return playerOne;
     }
 
-    function setPLayerOne(val) {
+    function setPlayerOne(val) {
     	playerOne = val;
     }
 
@@ -16,7 +16,7 @@ $(document).ready(function() {
     	return playerTwo;
     }
 
-    function setPLayerTwo(val) {
+    function setPlayerTwo(val) {
     	playerOne = val;
     }
 
@@ -34,24 +34,45 @@ $(document).ready(function() {
     var database = firebase.database();
 
     $(".add-player-btn").on("click", function(event) {
-        event.preventDefault();
-
-		
-		console.log('playerOne is: ' + getPlayerOne);
-        var playerName = $(".name-input").val().trim();
         
-	
-        var playerOne = {
-            name: playerName
-        };
-	
+        event.preventDefault();
+        
+        console.log(getPlayerOne());
+		
+		if (getPlayerOne() === false) { 
+			console.log('playerOne is: ' + getPlayerOne());
+	        var playerName = $(".name-input").val().trim();
+	        
+	        var playerOne = {
+	            name: playerName
+	        };
+		
+			database.ref().push(playerOne);
+	        console.log("Successfully add newPlayer");
 
+	        $("name-input").val("");
 
-        database.ref().push(playerOne);
-        console.log("Successfully add newPlayer");
+	        setPlayerOne(true)
 
-        $("name-input").val("");
-      	// if (playerOne === false) {  }
+      	} else if (setPlayerOne() === true && getPlayerTwo() === false) {
+      		console.log('playerOne is: ' + getPlayerTwo + ', playerTwo is: ' + getPlayerTwo);
+	        var playerName = $(".name-input").val().trim();
+	        
+	        var playerTwo = {
+	            name: playerName
+	        };
+		
+			database.ref().push(playerTwo);
+	        console.log("Successfully add newPlayer");
+
+	        $("name-input").val("");
+
+	        setPlayerTwo(true)
+
+      	} else {
+      		console.log("Start the FUCKING game!")
+      	}
+
     });
 
 
